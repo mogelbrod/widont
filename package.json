@@ -4,7 +4,8 @@
   "description": "Avoids typographical widows in strings by converting the last space/hyphens to be non-breaking",
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha"
+    "test": "mocha",
+    "preversion": "npm run lint && npm run test"
   },
   "main": "index.js",
   "files": [
