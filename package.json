@@ -1,0 +1,34 @@
+{
+  "name": "widont",
+  "version": "1.0.0",
+  "description": "Avoids typographical widows in strings by converting the last space/hyphens to be non-breaking",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "author": {
+    "name": "Victor Hallberg",
+    "email": "victor@hallberg.cc",
+    "url": "http://hallberg.cc/"
+  },
+  "repository": "mogelbrod/widont",
+  "homepage": "https://github.com/mogelbrod/widont#readme",
+  "bugs": "https://github.com/mogelbrod/widont/issues",
+  "license": "MIT",
+  "keywords": [
+    "widont",
+    "widow",
+    "strings",
+    "typography",
+    "utility",
+    "util"
+  ],
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "mocha": "^4.0.1"
+  }
+}
