@@ -1,5 +1,6 @@
 env:
-  node: true
   browser: true
-  amd: true
+globals:
+  module: true
+  define: true
 extends: 'eslint:recommended'

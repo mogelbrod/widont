@@ -5,25 +5,49 @@
   var WIDONT_REGEX = /([^\s])\s+([^\s]+)\s*$/
   var DASH_REGEX = /-/g
 
-  // Replace with the non-breaking versions of each character by default
-  widont.space = '\u00a0'
-  widont.hyphen = '\u2011'
+  // Predefined replacement options
+  var REPLACEMENTS = widont.replacements = {
+    unicode: {
+      space: '\u00a0',
+      hyphen: '\u2011'
+    },
+    html: {
+      space: '&nbsp;',
+      hyphen: '&#8209;'
+    },
+    ascii: {
+      space: '_',
+      hyphen: '~'
+    }
+  }
 
-  function widont(str, space, hyphen) {
+  function widont(str, replacements) {
     if (typeof str !== 'string') {
       return str
     }
 
-    // Default values
-    if (space == null) space = widont.space
-    if (hyphen == null) hyphen = widont.hyphen
+    switch (typeof replacements) {
+      case 'object':
+        if (replacements.space == null || replacements.hyphen == null) {
+          throw new TypeError('widont: Must provide `space` & `hyphen` replacements')
+        }
+        break
+      case 'string':
+        if (!(replacements in REPLACEMENTS)) {
+          throw new TypeError('widont: Unknown replacements `' + replacements + '`')
+        }
+        replacements = REPLACEMENTS[replacements]
+        break
+      default:
+        replacements = REPLACEMENTS.unicode
+    }
 
     return str.replace(WIDONT_REGEX, function widontReplacer(str, lead, word) {
       // Prefer replacing hyphens inside last word if present
       if (word.indexOf('-') >= 0) {
-        return lead + ' ' + word.replace(DASH_REGEX,  hyphen)
+        return lead + ' ' + word.replace(DASH_REGEX, replacements.hyphen)
       }
-      return lead + space + word
+      return lead + replacements.space + word
     })
   }
 

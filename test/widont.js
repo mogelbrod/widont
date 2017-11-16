@@ -17,18 +17,34 @@ describe('widont', function() {
     )
   })
 
-  it('respects optional space argument', function() {
+  it('uses named replacements', function() {
     assert.equal(
-      widont('I get HTML entities instead', '&nbsp;', '&#8209;'),
+      widont('I get HTML entities instead', 'html'),
       'I get HTML entities&nbsp;instead'
+    )
+
+    assert.equal(
+      widont('I get HTML entities-instead', 'html'),
+      'I get HTML entities&#8209;instead'
     )
   })
 
-  it('respects optional hyphen argument', function() {
+  it('uses custom replacements', function() {
     assert.equal(
-      widont('I get HTML entities-instead', '&nbsp;', '&#8209;'),
-      'I get HTML entities&#8209;instead'
+      widont('I get custom spaces', {space: '!!', hyphen: '??'}),
+      'I get custom!!spaces'
     )
+  })
+
+  it('throws TypeError for unknown named replacements', function() {
+    assert.throws(widont.bind(null, 'a b', ''), TypeError)
+    assert.throws(widont.bind(null, 'a b', 'unknown'), TypeError)
+  })
+
+  it('throws TypeError for incomplete replacements objects', function() {
+    assert.throws(widont.bind(null, 'a b', {}), TypeError)
+    assert.throws(widont.bind(null, 'a b', {space: '!'}), TypeError)
+    assert.throws(widont.bind(null, 'a b', {hyphen: '!'}), TypeError)
   })
 
   it('doesn\'t touch strings with less than two words', function() {
@@ -51,11 +67,7 @@ describe('widont', function() {
     })
   })
 
-  it('exports space constant', function() {
-    assert.ok(widont.space)
-  })
-
-  it('exports hyphen constant', function() {
-    assert.ok(widont.hyphen)
+  it('exports named replacements', function() {
+    assert.equal(typeof widont.replacements, 'object')
   })
 })
