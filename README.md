@@ -25,6 +25,15 @@ widont('I get exclamation marks', { spaces: '!!', hyphens: '??' })
 // => 'I get exclamation!!marks'
 ```
 
+### In TypeScript
+
+```ts
+import * as widont from 'widont'
+
+widont('TypeScript says hello', 'html')
+// => 'TypeScript says&nbsp;hello'
+```
+
 ## API
 
 ### `widont(string, [replacements='unicode'])`
