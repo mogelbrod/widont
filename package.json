@@ -1,6 +1,6 @@
 {
   "name": "widont",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Avoids typographical widows in strings by converting the last space/hyphens to be non-breaking",
   "scripts": {
     "lint": "eslint .",
