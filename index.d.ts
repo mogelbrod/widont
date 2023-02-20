@@ -3,14 +3,14 @@ export as namespace widont;
 export = widont;
 
 declare function widont(
-  str: String,
+  str: string,
   replacements?: widont.Replacements,
-) : String;
+): string;
 
 declare namespace widont {
   interface ReplacementsObj {
-    space: String;
-    hyphen: String;
+    space: string;
+    hyphen: string;
   }
 
   type Replacements = ReplacementsObj | 'unicode' | 'html' | 'ascii';
