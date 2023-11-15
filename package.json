@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha",
-    "preversion": "npm run lint && npm run test"
+    "preversion": "npm run lint && npm run test",
+    "postpublish": "git push origin master --follow-tags"
   },
   "main": "index.js",
   "types": "index.d.ts",
