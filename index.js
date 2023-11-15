@@ -43,6 +43,9 @@
         replacements = REPLACEMENTS.unicode
     }
 
+    if (minWords == null) {
+      minWords = 3
+    }
     if (typeof minWords === 'number' && minWords >= 2) {
       var minWordsRegex = new RegExp('\\S+(?:\\s+\\S+){' + (minWords - 1) + ',}')
       if (!minWordsRegex.test(str)) {

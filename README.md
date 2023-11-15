@@ -36,7 +36,7 @@ widont('TypeScript says hello', 'html')
 
 ## API
 
-### `widont(string, [replacements='unicode'])`
+### `widont(string, [replacements='unicode'], [minWords=3])`
 
 Replaces any number of whitespace before the last word of `string` with a
 non-breaking space, unless the last word contains hyphens in which case they
@@ -56,6 +56,11 @@ and `hyphen` (both must be provided):
 ```
 
 A `TypeError` will be thrown for unknown or incomplete `replacements` values.
+
+The `minWords` argument specifies the minimum number of words requires to be
+present in the string for the replacement to be applied. It defaults to 3 to
+avoid forcing strings only consisting of two words to be kept together, as that
+could lead to them overflowing.
 
 ## Origins
 The original `widont` was created by

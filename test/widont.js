@@ -57,6 +57,16 @@ describe('widont', function() {
     })
   })
 
+  it('doesn\'t touch strings with only two words by default', function() {
+    [
+      'hello world',
+      'Wow! Impressive',
+      'Many   spaces'
+    ].forEach(function(x) {
+      assert.equal(widont(x), x)
+    })
+  })
+
   it('respects `minWords` argument', function() {
     [
       'hello world',
