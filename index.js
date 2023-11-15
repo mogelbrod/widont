@@ -21,13 +21,14 @@
     }
   }
 
-  function widont(str, replacements) {
+  function widont(str, replacements, minWords) {
     if (typeof str !== 'string') {
       return str
     }
 
     switch (typeof replacements) {
       case 'object':
+        if (!replacements) break
         if (replacements.space == null || replacements.hyphen == null) {
           throw new TypeError('widont: Must provide `space` & `hyphen` replacements')
         }
@@ -40,6 +41,13 @@
         break
       default:
         replacements = REPLACEMENTS.unicode
+    }
+
+    if (typeof minWords === 'number' && minWords >= 2) {
+      var minWordsRegex = new RegExp('\\S+(?:\\s+\\S+){' + (minWords - 1) + ',}')
+      if (!minWordsRegex.test(str)) {
+        return str
+      }
     }
 
     return str.replace(WIDONT_REGEX, function widontReplacer(str, lead, word) {

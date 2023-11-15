@@ -47,7 +47,7 @@ describe('widont', function() {
     assert.throws(widont.bind(null, 'a b', {hyphen: '!'}), TypeError)
   })
 
-  it('doesn\'t touch strings with less than two words', function() {
+  it('doesn\'t touch strings with fewer than two words by default', function() {
     [
       '  ',
       'hello ',
@@ -55,6 +55,18 @@ describe('widont', function() {
     ].forEach(function(x) {
       assert.equal(widont(x), x)
     })
+  })
+
+  it('respects `minWords` argument', function() {
+    [
+      'hello world',
+      'Wow! Impressive',
+      'Many   spaces'
+    ].forEach(function(x) {
+      assert.equal(widont(x, 'ascii', 3), x)
+    })
+    assert.equal(widont('aaa bbb ccc', 'ascii', 3), 'aaa bbb_ccc')
+    assert.equal(widont('aaa bbb ccc ddd', 'ascii', 4), 'aaa bbb ccc_ddd')
   })
 
   it('returns empty strings as is', function() {
